@@ -1,0 +1,6 @@
+.DS_Store
+.conche/
+.build/
+Packages/
+Package.pins
+*.xcodeproj
