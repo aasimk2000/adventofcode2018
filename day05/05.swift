@@ -1,7 +1,7 @@
 import Foundation
 
 extension String {
-     mutating func removeFirstOccurance(of string: String){
+     mutating func removeFirstOccurance(of string: String) {
         guard let range = self.range(of: string) else {return}
         self.removeSubrange(range)
     }
@@ -16,25 +16,46 @@ if let rawInput = try? String(contentsOfFile: path) {
 }
 var polymer = input[0]
 
-let str = "abcdefghijklmnopqrstuvwxyz"
-let characterArray = Array(str)
-let uppercaseArray = Array(str.uppercased())
-var chars = [String]()
+extension String {
+    func reducePolymer(skipping: [Character] = [Character]()) -> String {
+        var polymer = self
+        let str = "abcdefghijklmnopqrstuvwxyz"
+        let characterArray = Array(str)
+        var chars = [String]()
 
-for (i, j) in zip(characterArray, uppercaseArray) {
-    chars.append(String(i)+String(j))
-    chars.append(String(j)+String(i))
+        for alpha in characterArray {
+            if !skipping.contains(alpha) {
+                chars.append(String(alpha)+String(alpha).uppercased())
+                chars.append(String(alpha).uppercased()+String(alpha))
+            }
+        }
+
+        var old = polymer
+
+        repeat {
+            old = polymer
+            for unitType in chars {
+                polymer.removeFirstOccurance(of: unitType)
+            }
+        } while (polymer != old)
+        return polymer
+    }
 }
 
-var old = polymer
-repeat {
-    old = polymer
-    for i in chars {
-        polymer.removeFirstOccurance(of: i)
-    }
-} while (polymer != old)
+let reduction = polymer.reducePolymer()
 
-print(polymer.count)
+print("Part A: \(reduction.count)")
 
+let str = "abcdefghijklmnopqrstuvwxyz"
+let characterArray = Array(str)
+var numberOfUnits = Set<Int>()
 
+for unitType in characterArray {
+    var reducer = polymer
+    reducer = reducer.replacingOccurrences(of: String(unitType), with: "")
+    reducer = reducer.replacingOccurrences(of: String(unitType).uppercased(), with: "")
+    reducer = reducer.reducePolymer(skipping: [unitType])
+    numberOfUnits.insert(reducer.count)
+}
 
+print("Part B: \(numberOfUnits.min()!)")
