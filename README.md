@@ -8,5 +8,6 @@ My attempt at solving Advent of Code 2018 in Swift
 | [Day 2: Inventory Management System](https://adventofcode.com/2018/day/2) | [02b.swift](day02/02a.swift)  [02b.swift](day02/02b.swift) |
 | [Day 3: No Matter How You Slice It](https://adventofcode.com/2018/day/3)  | [03.swift](day03/03.swift)                                 |
 | [Day 4: Repose Record](https://adventofcode.com/2018/day/4)               | [04.swift](day04/04.swift)                                 |
+| [Day 5: Alchemical Reduction](https://adventofcode.com/2018/day/5)        | [05.swift](day05/05.swift)                                 |
+| [Day 6: Chronal Coordinates](https://adventofcode.com/2018/day/6)         | [06.swift](day06/06.swift)                                 |
 |                                                                           |                                                            |
-
